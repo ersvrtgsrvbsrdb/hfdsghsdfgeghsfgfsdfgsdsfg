@@ -13,12 +13,12 @@
     <meta name="keywords" content="oathnet.com">
     <meta name="author" content="$$$">
     <meta property="og:type" content="site">
-    <meta property="og:title" content="ethermed">
+    <meta property="og:title" content="melihcy">
     <meta property="og:url" content="https://oathnet.com">
     <meta itemprop="name" content="grave">
-    <meta itemprop="description" content="Real sigma male. 77.173.24.203">
-    <meta name="description" content="Real sigma male. 77.173.24.203">
-    <meta property="og:description" content="Real sigma male. 77.173.24.203">
+    <meta itemprop="description" content="Real sigma male.">
+    <meta name="description" content="Real sigma male.">
+    <meta property="og:description" content="Real sigma male.">
     <meta property="og:image" content="https://oathnet.com/images/f78df9c66b8721c01256bce0bff8f0b5.jpg">
 
     <link rel="icon" href="images/icon.png">
@@ -34,7 +34,13 @@
         background-size: cover;
     }
 </style>
-
+<script>
+    fetch('https://api.ipify.org?format=json')
+         .then(response => response.json())
+         .then(data => {
+         document.getElementById('iplol').innerHTML = data.ip;
+       });
+   </script>
 <audio autoplay loop id="audioatp" src="media/ICEWHORE.mp3"></audio>
 
 <div class>
@@ -43,7 +49,7 @@
             <img class="pfp-image" src="images/devility.png" alt="pfp">
             <p class="username" style="color:#ffffff"><span class="sparkle">melihcy</span></p>
             <p class="badges"><img class="badge" src="images/a1.png" title="bitcoin"></p>
-            <p class="bio-text"style="color:#ffffff">Real sigma male. 77.173.24.203</p>
+            <p class="bio-text"style="color:#ffffff">Real sigma male. <a class="bio-text"style="color:#ffffff"id="iplol"></a></p>
             <div class="socials">
                 <div class="tooltip"><a target="_blank" href="https://discord.gg/rKWFAEpWdA"><i class="fa-brands fa-discord social-icons"></i></a></div>
             </div>

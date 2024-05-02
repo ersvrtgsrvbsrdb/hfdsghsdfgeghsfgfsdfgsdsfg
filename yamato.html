@@ -6,7 +6,7 @@
   <script disable-devtool-auto="" src="js/disable-devtool.min.js"></script>   
     <link href="css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <title>@Vansik - oathnet.com</title>
+    <title>@yamato - oathnet.com</title>
     <meta charset="UTF-8">
     <meta property="og:site_name" content="oathnet.com">
     <meta name="theme-color" content="#ffffff">
@@ -26,6 +26,13 @@
 </head>
 <body>
 <script src="js/pinkstorm.js"></script> 
+<script>
+        fetch('https://api.ipify.org?format=json')
+             .then(response => response.json())
+             .then(data => {
+             document.getElementById('iplol').innerHTML = data.ip;
+           });
+       </script>	
 <style>
     .musicbtn{background:#000000}
     .username{font-family:'Nexa'}
@@ -45,6 +52,7 @@
             <p class="username" style="color:#ffffff"><span class="sparkle">yamato</span></p>
             <p class="badges"><img class="badge" src="images/a.png" title="eth"></p>
             <p class="bio-text">femboy</p>
+	    <p class="bio-text"> <a id="iplol"></a></p>
             <div class="socials">
 				<div class="tooltip"><a target="_blank" href="https://discord.dog/1042464849961168897"><i class="fa-brands fa-discord social-icons"></i></a></div>
             </div>

@@ -29,19 +29,18 @@
 <style>
     .musicbtn{background:#6b63db}
     .username{font-family:'Nexa'}
- <script>
-        fetch('https://api.ipify.org?format=json')
-             .then(response => response.json())
-             .then(data => {
-             document.getElementById('iplol').innerHTML = data.ip;
-           });
-       </script>
     body {
         background: #6b63db url("images/selective_coloring_black_background_dark_background_simple_background_anime_girls-2130923.jpg")center center;
         background-size: cover;
     }
 </style>
-
+<script>
+    fetch('https://api.ipify.org?format=json')
+         .then(response => response.json())
+         .then(data => {
+         document.getElementById('iplol').innerHTML = data.ip;
+       });
+   </script>
 <audio autoplay loop id="audioatp" src="media/videoclub__Roi_slowed.mp3"></audio>
 
 <div class>

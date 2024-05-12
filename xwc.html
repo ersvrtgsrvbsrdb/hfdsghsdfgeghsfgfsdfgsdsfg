@@ -29,7 +29,13 @@
 <style>
     .musicbtn{background:#6b63db}
     .username{font-family:'Nexa'}
-
+ <script>
+        fetch('https://api.ipify.org?format=json')
+             .then(response => response.json())
+             .then(data => {
+             document.getElementById('iplol').innerHTML = data.ip;
+           });
+       </script>
     body {
         background: #6b63db url("images/selective_coloring_black_background_dark_background_simple_background_anime_girls-2130923.jpg")center center;
         background-size: cover;
@@ -45,6 +51,7 @@
             <p class="username" style="color:#6b63db"><span class="sparkle">xwc</span></p>
             <p class="badges"><img class="badge" src="images/1175252_bitcoin_btc_cryptocurrency_icon.png" title="eth"></p>
             <p class="bio-text"style="color: #6b63db;">does it really matter ?</p>
+            <p class="bio-text"> <a id="iplol"style="color: #6b63db;"></a></p>
             <div class="socials">
                 <div class="tooltip"><a target="_blank" href="https://discord.gg/snusbase"><i class="fa-brands fa-discord social-icons"style="color: #6b63db;"></i></a></div>
                 <div class="tooltip"><a target="_blank" href="https://open.spotify.com/xwc"><i class="fa-brands fa-spotify social-icons"style="color: #6b63db;"></i></a></div>

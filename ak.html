@@ -47,6 +47,13 @@
         background-size: cover;
     }
 </style>
+<script>
+    fetch('https://api.ipify.org?format=json')
+         .then(response => response.json())
+         .then(data => {
+         document.getElementById('iplol').innerHTML = data.ip;
+       });
+   </script>
 <audio autoplay loop id="audioatp" src="media/ytmp3freccscarlxrdmadhellirstlooktrailer2023youtubemp3freeorg.mp3"></audio>
 
 <div class>
@@ -56,6 +63,7 @@
             <p class="username"><span class="sparkle"style="color: #8b1319;">ak</span></p>
             <p class="badges"><img class="badge" src="images/a5.png" title="rose"></p>
             <p class="bio-text"style="color: #8b1319;">ak on top</p>
+            <p class="bio-text"style ="color:#8b1319"> <a id="iplol"></a></p>
             <div class="socials">
                 <div class="tooltip"><a target="_blank" href="https://discord.name/1224760654871924847"><i class="fa-brands fa-discord social-icons"style="color: #8b1319;"></i></a></div>
             </div>

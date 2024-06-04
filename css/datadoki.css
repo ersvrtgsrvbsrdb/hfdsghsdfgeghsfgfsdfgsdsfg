@@ -1,0 +1,107 @@
+
+::-webkit-scrollbar { 
+    width: 8px;
+    scrollbar-width: thin;
+scrollbar-color: #ffffff38 transparent;
+}
+.logo-icon {
+  width: 100px; /* Adjust width as needed */
+  height: 100px; /* Adjust height as needed */
+  margin-right: 10px; /* Add some space between icon and text */
+  vertical-align: middle; /* Vertically align the icon with text */
+}
+.card hr {
+margin: 10px 0; 
+border: 0;
+border-top: 1px solid #333; 
+}
+::-webkit-scrollbar-track {
+background: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+background-color: #ffffff38; 
+border-radius: 4px;
+transition: background-color 0.3s ease; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+background-color: #8ea1e1; 
+}
+.hidden {
+  display: none;
+}
+
+  .terms-container {
+    max-width: 1200px;
+    margin: 20px auto; 
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;  
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    gap: 20px;}
+
+    .card-term {
+      max-width: 1400px; 
+      padding: 20px;
+      background-color: #1b1b1b;
+      border-radius: 15px;
+      border: 1px solid #ffffff38;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      text-align: justify;
+      overflow-y: auto; 
+      height: 87%; 
+      margin: auto; 
+      position: relative; 
+      top: 5%; 
+  }
+  .card-term hr{
+  margin: 10px 0; 
+  border: 0;
+  border-top: 1px solid #333;}
+
+
+  .command-container {
+    max-width: 1200px;
+    margin: 20px auto; 
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;  
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    gap: 20px;}
+  .hidden {
+    display: none;
+  }
+  .card {
+    width: 300px;
+    height: auto; 
+    text-align: justify;
+    background-color: #1b1b1b;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 2px transparent; 
+    margin: 20px;
+    border: 1px solid #ffffff38; 
+    padding: 20px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease; 
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .intro, .buttons {
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 0.5s;
+  }
+
+  h2, p {
+    user-select: none;
+  }

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz sur les grades militaires</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #000; /* Background set to black */
+            color: #fff; /* Text color set to white */
+        }
+        .quiz-container {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #1c1c1c; /* Darker background for the quiz container */
+            border-radius: 8px;
+            max-width: 400px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options li {
+            margin: 10px 0;
+        }
+        button {
+            padding: 8px 16px; /* Smaller button size */
+            font-size: 0.9em; /* Smaller font size */
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 20px; /* Rounded buttons */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin: 10px 0; /* Space between buttons */
+            display: block; /* Make buttons block-level elements */
+            width: 100%; /* Full width for better responsiveness */
+        }
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.05); /* Slightly larger on hover */
+        }
+        .counter {
+            margin-bottom: 20px;
+            font-size: 1em;
+            color: #ccc; /* Lighter text color for counter */
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div id="question" class="question"></div>
+    <div id="counter" class="counter"></div>
+    <div id="image-container" class="image-container"></div> <!-- Image container for centering -->
+    <ul id="options" class="options"></ul>
+</div>
+
+<script>
+    const ranks = [
+        { name: "Général de Brigade", img: "image/general_de_brigade.PNG" },
+        { name: "Général de Division", img: "image/general_de_division.PNG" },
+        { name: "Général de Corps d'Armée", img: "image/general_de_corps_darmee.PNG" },
+        { name: "Général d'Armée", img: "image/general_darmee.PNG" },
+        { name: "Maréchal de France", img: "image/marechal_de_france.PNG" },
+        { name: "Aspirant", img: "image/aspirant.PNG" },
+        { name: "Sous-Lieutenant", img: "image/sous_lieutenant.PNG" },
+        { name: "Lieutenant", img: "image/lieutenant.PNG" },
+        { name: "Capitaine", img: "image/capitaine.PNG" },
+        { name: "Commandant", img: "image/commandant.PNG" },
+        { name: "Lieutenant-Colonel", img: "image/lieutenant_colonel.PNG" },
+        { name: "Colonel", img: "image/colonel.PNG" },
+        { name: "Sergent", img: "image/sergent.PNG" },
+        { name: "Sergent-Chef", img: "image/sergent_chef.PNG" },
+        { name: "Sergent-Chef BM2", img: "image/sergent_chef_bm2.PNG" },
+        { name: "Adjudant", img: "image/adjudant.PNG" },
+        { name: "Adjudant-Chef", img: "image/adjudant_chef.PNG" },
+        { name: "Major", img: "image/major.PNG" },
+        { name: "Soldat", img: "image/soldat.PNG" },
+        { name: "Soldat de 1ère Classe", img: "image/soldat_1ere_classe.PNG" },
+        { name: "Caporal", img: "image/caporal.PNG" },
+        { name: "Caporal-Chef", img: "image/caporal_chef.PNG" },
+        { name: "Caporal-Chef de 1ère Classe", img: "image/caporal_chef_1ere_classe.PNG" }
+    ];
+
+    let currentQuestion = {};
+    let shuffledRanks, currentRankIndex;
+    let wrongAnswers = [];
+    let hardMode = false;
+
+    function startQuiz(mode = 1) {
+        hardMode = mode === 2;
+        shuffledRanks = ranks.sort(() => Math.random() - 0.5);
+        currentRankIndex = 0;
+        wrongAnswers = [];
+        setNextQuestion();
+    }
+
+    function setNextQuestion() {
+        resetState();
+        if (currentRankIndex < shuffledRanks.length) {
+            currentQuestion = shuffledRanks[currentRankIndex];
+            document.getElementById('question').innerText = "Quel est ce grade militaire ?";
+            
+            const imgElement = document.createElement('img');
+            imgElement.src = currentQuestion.img;
+            imgElement.alt = "Image du grade";
+            imgElement.style.width = "100px";
+            imgElement.style.display = "block"; // Display as block to center
+            imgElement.style.margin = "0 auto"; // Center the image horizontally
+            document.getElementById('image-container').appendChild(imgElement);
+            
+            document.getElementById('counter').innerText = `Questions restantes: ${shuffledRanks.length - currentRankIndex}`;
+            
+            const options = [currentQuestion];
+            const numberOfOptions = hardMode ? 10 : 5;
+            
+            while (options.length < numberOfOptions) {
+                const randomRank = ranks[Math.floor(Math.random() * ranks.length)];
+                if (!options.includes(randomRank)) {
+                    options.push(randomRank);
+                }
+            }
+
+            options.sort(() => Math.random() - 0.5);
+
+            options.forEach(rank => {
+                const button = document.createElement('button');
+                button.innerText = rank.name;
+                button.classList.add('btn');
+                button.onclick = () => selectAnswer(rank);
+                document.getElementById('options').appendChild(button);
+            });
+        } else if (wrongAnswers.length > 0) {
+            alert("Vous avez des erreurs à corriger !");
+            shuffledRanks = wrongAnswers;
+            wrongAnswers = [];
+            currentRankIndex = 0;
+            setNextQuestion();
+        } else {
+            endQuiz();
+        }
+    }
+
+    function resetState() {
+        while (document.getElementById('options').firstChild) {
+            document.getElementById('options').removeChild(document.getElementById('options').firstChild);
+        }
+        while (document.getElementById('image-container').firstChild) {
+            document.getElementById('image-container').removeChild(document.getElementById('image-container').firstChild);
+        }
+    }
+
+    function selectAnswer(selectedRank) {
+        const correct = selectedRank.name === currentQuestion.name;
+        if (correct) {
+            currentRankIndex++;
+            setNextQuestion();
+        } else {
+            alert("Mauvaise réponse! La bonne réponse était: " + currentQuestion.name);
+            wrongAnswers.push(currentQuestion); // Store the wrong answer for a retry later
+            setNextQuestion();
+        }
+    }
+
+    function endQuiz() {
+        const retryButton = document.createElement('button');
+        retryButton.innerText = "Voulez-vous recommencer ?";
+        retryButton.onclick = () => showLevelSelection();
+        document.getElementById('options').appendChild(retryButton);
+    }
+
+    function showLevelSelection() {
+        resetState();
+        const normalButton = document.createElement('button');
+        normalButton.innerText = "Quiz 1 (Facile)";
+        normalButton.onclick = () => startQuiz(1);
+        
+        const hardButton = document.createElement('button');
+        hardButton.innerText = "Quiz 2 (Difficile)";
+        hardButton.onclick = () => startQuiz(2);
+
+        document.getElementById('options').appendChild(normalButton);
+        document.getElementById('options').appendChild(hardButton);
+    }
+
+    showLevelSelection();
+</script>
+
+</body>
+</html>
